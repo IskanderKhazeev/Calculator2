@@ -1,6 +1,5 @@
 package com.geekbrains.calculator2;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 
@@ -8,11 +7,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
-
-
     private TextView textCalculation;
     private TextView textResult;
     private Button button1;
@@ -32,10 +28,9 @@ public class MainActivity extends AppCompatActivity {
     private Button buttonPlus;
     private Button buttonEqually;
     private Button buttonDelete;
-private double result;
+    private double result;
     private double numberOne;
     private double numberTwo;
-    private boolean operatorIsCalledOnce = false;
 
 
     @Override
@@ -63,6 +58,8 @@ private double result;
         buttonEqually = findViewById(R.id.button_equally);
         buttonDelete = findViewById(R.id.button_delete);
 
+        equallySetOnClickListener(buttonEqually);
+        deleteSetOnClickListener(buttonDelete);
         mySetOnClickListener(button1);
         mySetOnClickListener(button2);
         mySetOnClickListener(button3);
@@ -78,104 +75,58 @@ private double result;
         mySetOnClickListener(buttonMultiply);
         mySetOnClickListener(buttonMinus);
         mySetOnClickListener(buttonPlus);
-        mySetOnClickListener(buttonEqually);
-        mySetOnClickListener(buttonDelete);
+    }
+    public void equallySetOnClickListener(Button btn) {
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CharSequence incomingCharSequence;
+                incomingCharSequence = textCalculation.getText();
+
+                int iCharSequence = 0;
+                for (int i = 0; i < incomingCharSequence.length(); i++) {
+                    if (incomingCharSequence.charAt(i) == '+'
+                            || incomingCharSequence.charAt(i) == '-'
+                            || incomingCharSequence.charAt(i) == '/'
+                            || incomingCharSequence.charAt(i) == 'x') {
+                        iCharSequence = i;
+                    }
+                }
+                numberOne = Double.parseDouble(String.valueOf(incomingCharSequence.subSequence(0, iCharSequence)));
+                numberTwo = Double.parseDouble(String.valueOf(incomingCharSequence.subSequence(iCharSequence + 1, incomingCharSequence.length())));
+                determinationOperator(incomingCharSequence);
+                textResult.setText(String.valueOf(Math.round(result * 100.0) / 100.0));
 
 
+            }
+        });
+    }
+
+    public void deleteSetOnClickListener(Button btn) {
+        btn.setOnClickListener(v -> textCalculation.setText(String.valueOf("")));
     }
 
     public void mySetOnClickListener(Button btn) {
-        if (btn == buttonEqually) {
-            btn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    CharSequence incomingCharSequence;
-                    incomingCharSequence = textCalculation.getText();
-
-                    int iCharSequence = 0;
-                    for (int i = 0; i < incomingCharSequence.length(); i++) {
-                        if (incomingCharSequence.charAt(i) == '+'
-                                || incomingCharSequence.charAt(i) == '-'
-                                || incomingCharSequence.charAt(i) == '/'
-                                || incomingCharSequence.charAt(i) == 'x') {
-                            iCharSequence = i;
-                        }
-                    }
-                    numberOne = Double.parseDouble(String.valueOf(incomingCharSequence.subSequence(0, iCharSequence)));
-                    numberTwo = Double.parseDouble(String.valueOf(incomingCharSequence.subSequence(iCharSequence + 1, incomingCharSequence.length())));
-                    determinationOperator(incomingCharSequence);
-                    textResult.setText(String.valueOf(Math.round(result * 100.0) / 100.0));
-
-
-                }
-            });
-        } else if (btn == buttonDelete) {
-            btn.setOnClickListener(v -> textCalculation.setText(String.valueOf("")));
-        } else if (btn == buttonDivide
-                || btn == buttonMultiply
-                || btn == buttonMinus
-                || btn == buttonPlus) {
-            if (operatorIsCalledOnce == false) {
-                btn.setOnClickListener(v -> textCalculation.setText((textCalculation.getText()) + String.valueOf(btn.getText())));
-                operatorIsCalledOnce = true;
-            } else{
-                btn.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        CharSequence incomingCharSequence;
-                        incomingCharSequence = textCalculation.getText();
-
-                        int iCharSequence = 0;
-                        for (int i = 0; i < incomingCharSequence.length(); i++) {
-                            if (incomingCharSequence.charAt(i) == '+'
-                                    || incomingCharSequence.charAt(i) == '-'
-                                    || incomingCharSequence.charAt(i) == '/'
-                                    || incomingCharSequence.charAt(i) == 'x') {
-                                iCharSequence = i;
-                            }
-                        }
-                        numberOne = Double.parseDouble(String.valueOf(incomingCharSequence.subSequence(0, iCharSequence)));
-                        numberTwo = Double.parseDouble(String.valueOf(incomingCharSequence.subSequence(iCharSequence + 1, incomingCharSequence.length())));
-                        determinationOperator(incomingCharSequence);
-                        textResult.setText(String.valueOf(Math.round(result * 100.0) / 100.0));
-                        textCalculation.setText((textResult.getText())+String.valueOf(btn.getText()));
-
-
-                    }
-                });
-            }
-        }else{
-            btn.setOnClickListener(v -> textCalculation.setText((textCalculation.getText()) + String.valueOf(btn.getText())));
-        }
-
+        btn.setOnClickListener(v -> textCalculation.setText((textCalculation.getText()) + String.valueOf(btn.getText())));
     }
 
-    private void determinationOperator(CharSequence charSequence) {
+    public void determinationOperator(CharSequence charSequence) {
         for (int i = 0; i < charSequence.length(); i++) {
             if (charSequence.charAt(i) == '+') {
                 result = numberOne + numberTwo;
-                operatorIsCalledOnce = true;
+
             } else if (charSequence.charAt(i) == '-') {
                 result = numberOne - numberTwo;
-                operatorIsCalledOnce = true;
+
             } else if (charSequence.charAt(i) == '/') {
                 result = numberOne / numberTwo;
-                operatorIsCalledOnce = true;
+
             } else if (charSequence.charAt(i) == 'x') {
                 result = numberOne * numberTwo;
-                operatorIsCalledOnce = true;
+
             }
         }
     }
 }
 
-    /*public void onSaveInstanceState(@NonNull Bundle instanceState) {
-        super.onSaveInstanceState(instanceState);
-        instanceState.put(tvTag, counter);
-    }
 
-    @Override
-    protected void onRestoreInstanceState(@NonNull Bundle instanceState) {
-        super.onRestoreInstanceState(instanceState);
-        counter = instanceState.getInt(tvTag, 0);
-        textCounter.setText(String.valueOf(counter));  }*/

@@ -5,4 +5,7 @@
     <dimen name="btn_delete_size">20dp</dimen>
     <dimen name="margin_text_result">14dp</dimen>
     <dimen name="text_result">30dp</dimen>
+    <dimen name="btn_text_size_land">20dp</dimen>
+    <dimen name="text_result_land">20dp</dimen>
+    <dimen name="btn_delete_size_land">15dp</dimen>
 </resources>
