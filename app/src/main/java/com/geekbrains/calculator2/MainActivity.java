@@ -1,5 +1,6 @@
 package com.geekbrains.calculator2;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 
@@ -8,7 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity  {
     private TextView textCalculation;
     private TextView textResult;
     private Button button1;
@@ -31,6 +32,10 @@ public class MainActivity extends AppCompatActivity {
     private double result;
     private double numberOne;
     private double numberTwo;
+    private String parcelable_tag;
+
+
+
 
 
     @Override
@@ -76,6 +81,23 @@ public class MainActivity extends AppCompatActivity {
         mySetOnClickListener(buttonMinus);
         mySetOnClickListener(buttonPlus);
     }
+    public void onSaveInstanceState(@NonNull Bundle instanceState) {
+        super.onSaveInstanceState(instanceState);
+        SaveTextViews saveTextView = new SaveTextViews(textCalculation, textResult);
+        saveTextView.setTextCalculation(textCalculation);
+        saveTextView.setTextResult(textResult);
+        instanceState.putParcelable(parcelable_tag, saveTextView);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(@NonNull Bundle instanceState) {
+        super.onRestoreInstanceState(instanceState);
+        SaveTextViews saveTextView = new SaveTextViews(textCalculation, textResult);
+        saveTextView = instanceState.getParcelable(parcelable_tag);
+        textCalculation.setText(saveTextView.getTextCalculation().getText());
+        textResult.setText(saveTextView.getTextResult().getText());
+    }
+
     public void equallySetOnClickListener(Button btn) {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
