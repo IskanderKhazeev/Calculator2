@@ -4,6 +4,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+    <RadioGroup
+        android:id="@+id/radioButtons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
+    <com.google.android.material.radiobutton.MaterialRadioButton
+        android:id="@+id/radioButtonAppThemeLight"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/material_light" />
+    <com.google.android.material.radiobutton.MaterialRadioButton
+        android:id="@+id/radioButtonMyDarkTheme"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/material_dark" />
+   </RadioGroup>
+
 
     <Space
         android:layout_width="match_parent"
