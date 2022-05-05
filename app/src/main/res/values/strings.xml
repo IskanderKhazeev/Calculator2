@@ -20,4 +20,9 @@
     <string name="text_calculation"> </string>
     <string name="string_text_result"> </string>
 
+
+    <string name="material_light">Material light</string>
+    <string name="material_dark">Material dark</string>
+
+
 </resources>

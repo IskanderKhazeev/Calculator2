@@ -4,12 +4,16 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity  {
+import com.google.android.material.radiobutton.MaterialRadioButton;
+
+public class MainActivity extends BaseActivity {
     private TextView textCalculation;
     private TextView textResult;
     private Button button1;
@@ -41,7 +45,9 @@ public class MainActivity extends AppCompatActivity  {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTheme(getAppTheme(R.style.AppThemeLight));
         setContentView(R.layout.activity_main);
+        initThemeChooser();
 
         textCalculation = findViewById(R.id.text_calculation);
         textResult = findViewById(R.id.text_result);
@@ -81,6 +87,27 @@ public class MainActivity extends AppCompatActivity  {
         mySetOnClickListener(buttonMinus);
         mySetOnClickListener(buttonPlus);
     }
+
+
+    private void initThemeChooser() {
+        initRadioButton(findViewById(R.id.radioButtonAppThemeLight), AppThemeLight);
+        initRadioButton(findViewById(R.id.radioButtonMyDarkTheme), MyDarkTheme);
+
+        RadioGroup rg = findViewById(R.id.radioButtons);
+        ((MaterialRadioButton) rg.getChildAt(getCodeStyle(AppThemeLight))).setChecked(true);
+    }
+
+    private void initRadioButton(View button, final int codeStyle) {
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setAppTheme(codeStyle);
+                recreate();
+            }
+        });
+    }
+
+
     public void onSaveInstanceState(@NonNull Bundle instanceState) {
         super.onSaveInstanceState(instanceState);
         SaveTextViews saveTextView = new SaveTextViews(textCalculation, textResult);

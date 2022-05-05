@@ -1,0 +1,11 @@
+<resources>
+
+    <style name="CalculatorButtons" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <item name="android:textSize">@dimen/btn_text_size</item>
+        <item name="android:layout_margin">@dimen/btn_margin</item>
+    </style>
+    <style name="CalculatorButtonsLand" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <item name="android:textSize">@dimen/btn_text_size_land</item>
+        <item name="android:layout_margin">@dimen/btn_margin</item>
+    </style>
+</resources>
