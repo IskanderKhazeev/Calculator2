@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SettingsActivity"
+    android:orientation="vertical">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/text_settings"/>
+
+    <RadioGroup
+        android:id="@+id/radioButtons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:paddingTop="30dp">
+        <com.google.android.material.radiobutton.MaterialRadioButton
+            android:id="@+id/radioButtonAppThemeLight"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/material_light" />
+        <com.google.android.material.radiobutton.MaterialRadioButton
+            android:id="@+id/radioButtonMyDarkTheme"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/material_dark" />
+    </RadioGroup>
+
+</LinearLayout>

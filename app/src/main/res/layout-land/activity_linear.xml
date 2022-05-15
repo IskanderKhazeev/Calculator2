@@ -8,25 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.5" />
-    <RadioGroup
-        android:id="@+id/radioButtons"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:orientation="horizontal">
 
-        <com.google.android.material.radiobutton.MaterialRadioButton
-            android:id="@+id/radioButtonAppThemeLight"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/material_light" />
-
-        <com.google.android.material.radiobutton.MaterialRadioButton
-            android:id="@+id/radioButtonMyDarkTheme"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/material_dark" />
-    </RadioGroup>
 
     <TextView
         android:id="@+id/text_calculation"
