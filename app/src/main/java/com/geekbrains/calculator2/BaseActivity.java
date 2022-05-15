@@ -22,7 +22,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     public int getCodeStyle(int codeStyle) {
-        SharedPreferences sharedPref = getSharedPreferences(NameSharedPreference, MODE_PRIVATE);
+        SharedPreferences sharedPref = getSharedPreferences(NameSharedPreference,  MODE_PRIVATE );
         return sharedPref.getInt(AppTheme, codeStyle);
     }
 

@@ -23,6 +23,8 @@
 
     <string name="material_light">Material light</string>
     <string name="material_dark">Material dark</string>
+    <string name="btn_settings">Настройки темы</string>
+    <string name="text_settings">Настройки темы</string>
 
 
 </resources>

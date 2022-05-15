@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -37,6 +38,7 @@ public class MainActivity extends BaseActivity {
     private double numberOne;
     private double numberTwo;
     private String parcelable_tag;
+    private Button buttonSettings;
 
 
 
@@ -47,7 +49,7 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setTheme(getAppTheme(R.style.AppThemeLight));
         setContentView(R.layout.activity_main);
-        initThemeChooser();
+
 
         textCalculation = findViewById(R.id.text_calculation);
         textResult = findViewById(R.id.text_result);
@@ -68,6 +70,7 @@ public class MainActivity extends BaseActivity {
         buttonPlus = findViewById(R.id.button_plus);
         buttonEqually = findViewById(R.id.button_equally);
         buttonDelete = findViewById(R.id.button_delete);
+        buttonSettings = findViewById(R.id.button_settings);
 
         equallySetOnClickListener(buttonEqually);
         deleteSetOnClickListener(buttonDelete);
@@ -86,26 +89,22 @@ public class MainActivity extends BaseActivity {
         mySetOnClickListener(buttonMultiply);
         mySetOnClickListener(buttonMinus);
         mySetOnClickListener(buttonPlus);
+        settingsSetOnClickListener(buttonSettings);
     }
 
-
-    private void initThemeChooser() {
-        initRadioButton(findViewById(R.id.radioButtonAppThemeLight), AppThemeLight);
-        initRadioButton(findViewById(R.id.radioButtonMyDarkTheme), MyDarkTheme);
-
-        RadioGroup rg = findViewById(R.id.radioButtons);
-        ((MaterialRadioButton) rg.getChildAt(getCodeStyle(AppThemeLight))).setChecked(true);
-    }
-
-    private void initRadioButton(View button, final int codeStyle) {
-        button.setOnClickListener(new View.OnClickListener() {
+    private void settingsSetOnClickListener(Button btn) {
+        btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setAppTheme(codeStyle);
-                recreate();
+                Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
+                startActivity(intent);
             }
         });
     }
+
+
+
+
 
 
     public void onSaveInstanceState(@NonNull Bundle instanceState) {
